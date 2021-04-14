@@ -1,6 +1,6 @@
 # Laravel-VueJS-project-04
-
-# > Laravel
+---
+## Laravel
 ### Laravel is a MVC(Model View Controller) framework
 
 ## Build Setup
@@ -18,8 +18,8 @@ laravel new laravel-project4
 # create/run server #url: http://127.0.0.1:8000/                 
 php artisan serve                               
 ```
-
-# > Vue-JS
+---
+## Vue-JS
 ## Build Setup
 > install Node Js(v8 engine) | dependency (npm)
 * setup: [NOdeJs LTS](https://nodejs.org/en/download/)
