@@ -50,5 +50,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 ### Api Package configuration [Axios]
 ``` bash
-
+# individual project integration
+npm i axios --save
 ```
+> Add to:  ``` src/main.js ```
+``` bash
+``` import axios from 'axios'```
+```Vue.prototype.$http = axios```
+```
+> used to sent POST and GET request to the server

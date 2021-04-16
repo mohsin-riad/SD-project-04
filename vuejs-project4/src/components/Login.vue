@@ -5,14 +5,14 @@
                 <div class="card card-signin my-5">
                 <div class="card-body">
                     <h5 class="card-title text-center">Sign In</h5>
-                    <form class="form-signin">
+                    <form @submit.prevent="handle_submit" class="form-signin">
                     <div class="form-label-group">
-                        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                        <input type="email" id="inputEmail" v-model="email" class="form-control" placeholder="Email address" required autofocus>
                         <label for="inputEmail">Email address</label>
                     </div>
 
                     <div class="form-label-group">
-                        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                        <input type="password" id="inputPassword" v-model="password" class="form-control" placeholder="Password" required>
                         <label for="inputPassword">Password</label>
                     </div>
 
@@ -26,7 +26,24 @@
 </template>
 <script>
 export default {
-    
+    name: 'Login',
+    data() {
+      return {
+        email: '',
+        password: ''
+      }
+    },
+    methods: {
+      async handle_submit() {
+        const baseURI = 'http://127.0.0.1:8000/api/login'
+        const response = await this.$http.post(baseURI, {
+          email: this.email,
+          password: this.password
+        })
+
+        console.log(response);
+      }
+    }
 }
 </script>
 
