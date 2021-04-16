@@ -55,7 +55,7 @@ npm i axios --save
 ```
 > Add to:  ``` src/main.js ```
 ``` bash
-``` import axios from 'axios'```
-```Vue.prototype.$http = axios```
+import axios from 'axios'
+Vue.prototype.$http = axios
 ```
 > used to sent POST and GET request to the server

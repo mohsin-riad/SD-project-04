@@ -35,13 +35,13 @@ export default {
     },
     methods: {
       async handle_submit() {
-        const baseURI = 'http://127.0.0.1:8000/api/login'
+        const baseURI = 'http://127.0.0.1:8000/api/store-login'
         const response = await this.$http.post(baseURI, {
           email: this.email,
           password: this.password
         })
 
-        console.log(response);
+        console.log(response.data);
       }
     }
 }
