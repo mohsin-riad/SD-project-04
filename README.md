@@ -1,6 +1,6 @@
 # Laravel-VueJS-project-04
----
-## Laravel
+
+## Backend [Laravel]
 ### Laravel is a MVC(Model View Controller) framework
 
 ## Build Setup
@@ -19,7 +19,7 @@ laravel new laravel-project4
 php artisan serve                               
 ```
 ---
-## Vue-JS
+## Frontend [Vue-JS]
 ## Build Setup
 > install Node Js(v8 engine) | dependency (npm)
 * setup: [NOdeJs LTS](https://nodejs.org/en/download/)
@@ -35,4 +35,20 @@ vue init webpack vuejs-project4
 
 # create/run server  #url: http://localhost:8080/
 npm run dev                                     
+```
+
+### Bootstrap Integration
+``` bash
+# individual project integration
+npm i bootstrap
+```
+> Add to : ``` src/main.js ```
+``` bash
+import 'bootstrap'; 
+import 'bootstrap/dist/css/bootstrap.min.css'; 
+```
+
+### Api Package configuration [Axios]
+``` bash
+
 ```
