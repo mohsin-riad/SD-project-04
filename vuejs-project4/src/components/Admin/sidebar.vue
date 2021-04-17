@@ -2,42 +2,67 @@
     <div>
         <div class="sidebar-container">
             <div class="sidebar-logo">
-                Project Name
+                Admin Panel
             </div>
             <ul class="sidebar-navigation">
                 <li class="header">Navigation</li>
                 <li>
-                <a href="#">
+                <router-link to="/admin/dashboard">
                     <i class="fa fa-home" aria-hidden="true"></i> Homepage
-                </a>
+                </router-link>
                 </li>
                 <li>
-                <a href="#">
+                <router-link to="/admin/dashboard">
                     <i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard
-                </a>
+                </router-link>
                 </li>
                 <li class="header">Another Menu</li>
                 <li>
-                <a href="#">
+                <router-link to="#">
                     <i class="fa fa-users" aria-hidden="true"></i> Friends
-                </a>
+                </router-link>
                 </li>
                 <li>
-                <a href="#">
+                <router-link to="#">
                     <i class="fa fa-cog" aria-hidden="true"></i> Settings
-                </a>
+                </router-link>
                 </li>
                 <li>
-                <a href="#">
+                <router-link to="/admin/information">
                     <i class="fa fa-info-circle" aria-hidden="true"></i> Information
+                </router-link>
+                </li>
+                <li>
+                <a href="javascript:void(0)" @click="handleClick">
+                    <i class="fa fa-warning-circle" aria-hidden="true"></i> Logout
                 </a>
                 </li>
             </ul>
         </div>
+        <router-view></router-view>
     </div>
 </template>
 <script>
 export default {
-    
+    data() {
+        return {
+             user: null
+        }
+    },
+    methods: {
+        handleClick() {
+            localStorage.removeItem('token');
+            this.$router.push('/');
+        }
+    },
+    async created() {
+        const token = localStorage.getItem('token');
+        if(!localStorage.getItem('token')){
+            this.$router.push('/');
+        }
+        const baseURI = 'http://127.0.0.1:8000/api/get-user/' + token;
+        const response = await this.$http.get(baseURI);
+        console.log(response.data.user);
+    }
 }
 </script>

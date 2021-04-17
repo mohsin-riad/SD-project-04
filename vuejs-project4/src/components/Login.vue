@@ -39,9 +39,15 @@ export default {
         const response = await this.$http.post(baseURI, {
           email: this.email,
           password: this.password
-        })
-
-        console.log(response.data);
+        });
+        if(response.data.flag=='1'){
+          localStorage.setItem('token', response.data.user.id);
+          // console.log(response.data.user.id);
+          this.$router.push('/admin/dashboard');
+        }
+        else{
+          alert(response.data.msg);
+        }
       }
     }
 }
