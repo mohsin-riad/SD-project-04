@@ -17,33 +17,37 @@ class AuthController extends Controller
             if($user->role=='admin') {
                 return response()->json([
                     'user'=> $user,
-                    'msg'=> 'Successfully Logged in'
+                    'msg'=> 'Successfully Logged in',
+                    'flag'=> '1'
                 ]);
             }
             else if($user->role=='teacher') {
                 return response()->json([
                     'user'=> $user,
-                    'msg'=> 'Successfully Logged in'
+                    'msg'=> 'Successfully Logged in',
+                    'flag'=> '1'
                 ]);
             }
             else if($user->role=='student') {
                 return response()->json([
                     'user'=> $user,
-                    'msg'=> 'Successfully Logged in'
+                    'msg'=> 'Successfully Logged in',
+                    'flag'=> '1'
                 ]);
             }
         }
         else {
             // echo 'login failed <br>';
             return response()->json([
-                'msg'=> 'Invalid Email or Password'
+                'msg'=> 'Invalid Email or Password',
+                'flag'=> '0'
             ]);
         }
     }
-    // public function getUserById($id){ 
-    //     $user = User::find($id); //return obj
-    //     return response()->json([
-    //         'user'=> $user
-    //     ]);
-    // }
+    public function getUserById($id){ 
+        $user = User::find($id); //return obj
+        return response()->json([
+            'user'=> $user
+        ]);
+    }
 }
