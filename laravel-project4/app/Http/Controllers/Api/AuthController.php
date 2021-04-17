@@ -12,10 +12,8 @@ class AuthController extends Controller
     public function storeLogin(Request $r){
         $email =$r->email;
         $password =$r->password;
-        $user = User::where('email','=',$email)->where('password','=',$password)->first();
+        $user = User::where('email','=',$email)->where('password','=',md5($password))->first();
         if($user) {
-            Session::put('username',$user->name);
-            Session::put('userrole',$user->role);
             if($user->role=='admin') {
                 return response()->json([
                     'user'=> $user,
