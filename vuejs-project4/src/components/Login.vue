@@ -42,10 +42,18 @@ export default {
         });
         if(response.data.flag=='1'){
           localStorage.setItem('token', response.data.user.id);
-          // console.log(response.data.user.id);
-          this.$router.push('/admin/dashboard');
+          // console.log(response.data.user.role);
+          if(response.data.user.role=='admin'){
+            this.$router.push('/admin/dashboard');
+          }
+          else if(response.data.user.role=='student'){
+            this.$router.push('/student/dashboard');
+          } 
+          else {
+            this.$router.push('/teacher/dashboard');
+          }
         }
-        else{
+        else {
           alert(response.data.msg);
         }
       }

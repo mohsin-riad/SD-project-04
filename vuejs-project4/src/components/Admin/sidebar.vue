@@ -66,3 +66,22 @@ export default {
     }
 }
 </script>
+<style>
+.sidebar-logo {
+  padding: 10px 15px 10px 30px;
+  font-size: 20px;
+  background-color: #ac7500;
+}
+.sidebar-navigation li::before {
+  background-color: #c39642;
+  position: absolute;
+  content: '';
+  height: 100%;
+  left: 0;
+  top: 0;
+  -webkit-transition: width 0.2s ease-in;
+  transition: width 0.2s ease-in;
+  width: 3px;
+  z-index: -1;
+}
+</style>
