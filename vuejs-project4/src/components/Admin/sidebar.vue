@@ -1,45 +1,49 @@
 <template>
-    <div>
-        <div class="sidebar-container">
-            <div class="sidebar-logo">
-                Admin Panel
+    <div class="wrapper">
+        <div class="col-2">
+            <div class="sidebar-container">
+                <div class="sidebar-logo">
+                    Admin Panel
+                </div>
+                <ul class="sidebar-navigation">
+                    <li class="header">Navigation</li>
+                    <li>
+                    <router-link to="/admin/dashboard">
+                        <i class="fa fa-home" aria-hidden="true"></i> Homepage
+                    </router-link>
+                    </li>
+                    <li>
+                    <router-link to="/admin/dashboard">
+                        <i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard
+                    </router-link>
+                    </li>
+                    <li class="header">Another Menu</li>
+                    <li>
+                    <router-link to="#">
+                        <i class="fa fa-users" aria-hidden="true"></i> Friends
+                    </router-link>
+                    </li>
+                    <li>
+                    <router-link to="#">
+                        <i class="fa fa-cog" aria-hidden="true"></i> Settings
+                    </router-link>
+                    </li>
+                    <li>
+                    <router-link to="/admin/information">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i> Information
+                    </router-link>
+                    </li>
+                    <li>
+                    <a href="javascript:void(0)" @click="handleClick">
+                        <i class="fa fa-warning-circle" aria-hidden="true"></i> Logout
+                    </a>
+                    </li>
+                </ul>
             </div>
-            <ul class="sidebar-navigation">
-                <li class="header">Navigation</li>
-                <li>
-                <router-link to="/admin/dashboard">
-                    <i class="fa fa-home" aria-hidden="true"></i> Homepage
-                </router-link>
-                </li>
-                <li>
-                <router-link to="/admin/dashboard">
-                    <i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard
-                </router-link>
-                </li>
-                <li class="header">Another Menu</li>
-                <li>
-                <router-link to="#">
-                    <i class="fa fa-users" aria-hidden="true"></i> Friends
-                </router-link>
-                </li>
-                <li>
-                <router-link to="#">
-                    <i class="fa fa-cog" aria-hidden="true"></i> Settings
-                </router-link>
-                </li>
-                <li>
-                <router-link to="/admin/information">
-                    <i class="fa fa-info-circle" aria-hidden="true"></i> Information
-                </router-link>
-                </li>
-                <li>
-                <a href="javascript:void(0)" @click="handleClick">
-                    <i class="fa fa-warning-circle" aria-hidden="true"></i> Logout
-                </a>
-                </li>
-            </ul>
         </div>
-        <router-view></router-view>
+        <div class="col-10">
+            <router-view></router-view>
+        </div>
     </div>
 </template>
 <script>
@@ -67,6 +71,10 @@ export default {
 }
 </script>
 <style>
+.wrapper {
+    display: flex;
+    width: 100%;
+}
 .sidebar-logo {
   padding: 10px 15px 10px 30px;
   font-size: 20px;

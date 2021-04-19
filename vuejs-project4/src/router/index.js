@@ -11,7 +11,9 @@ import AdminSidebar from '@/components/Admin/Sidebar'
 import StudentSidebar from '@/components/Student/Sidebar'
 import TeacherSidebar from '@/components/Teacher/Sidebar'
 
-import Information from '@/components/Admin/Information'
+import AInformation from '@/components/Admin/Information'
+import SInformation from '@/components/Student/Information'
+import TInformation from '@/components/Teacher/Information'
 
 Vue.use(Router)
 
@@ -35,7 +37,7 @@ export default new Router({
         {
           path: 'information',
           name: 'Information',
-          component: Information
+          component: AInformation
         }
       ]
     },
@@ -51,7 +53,7 @@ export default new Router({
         {
           path: 'information',
           name: 'Information',
-          component: Information
+          component: SInformation
         }
       ]
     },
@@ -67,7 +69,7 @@ export default new Router({
         {
           path: 'information',
           name: 'Information',
-          component: Information
+          component: TInformation
         }
       ]
     }
