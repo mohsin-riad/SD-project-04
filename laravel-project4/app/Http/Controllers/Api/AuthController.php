@@ -14,27 +14,11 @@ class AuthController extends Controller
         $password =$r->password;
         $user = User::where('email','=',$email)->where('password','=',md5($password))->first();
         if($user) {
-            if($user->role=='admin') {
-                return response()->json([
-                    'user'=> $user,
-                    'msg'=> 'Successfully Logged in',
-                    'flag'=> '1'
-                ]);
-            }
-            else if($user->role=='teacher') {
-                return response()->json([
-                    'user'=> $user,
-                    'msg'=> 'Successfully Logged in',
-                    'flag'=> '1'
-                ]);
-            }
-            else if($user->role=='student') {
-                return response()->json([
-                    'user'=> $user,
-                    'msg'=> 'Successfully Logged in',
-                    'flag'=> '1'
-                ]);
-            }
+            return response()->json([
+                'user'=> $user,
+                'msg'=> 'Successfully Logged in',
+                'flag'=> '1'
+            ]);
         }
         else {
             // echo 'login failed <br>';
