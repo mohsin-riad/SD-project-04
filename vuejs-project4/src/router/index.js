@@ -1,18 +1,18 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import HelloWorld from '@/components/HelloWorld'
+
 import Login from '@/components/Login'
 
 import AdminDashboard from '@/components/Admin/Dashboard'
-import StudentDashboard from '@/components/Student/Dashboard'
-import TeacherDashboard from '@/components/Teacher/Dashboard'
-
 import AdminSidebar from '@/components/Admin/Sidebar'
-import StudentSidebar from '@/components/Student/Sidebar'
-import TeacherSidebar from '@/components/Teacher/Sidebar'
-
 import AInformation from '@/components/Admin/Information'
+
+import StudentDashboard from '@/components/Student/Dashboard'
+import StudentSidebar from '@/components/Student/Sidebar'
 import SInformation from '@/components/Student/Information'
+
+import TeacherDashboard from '@/components/Teacher/Dashboard'
+import TeacherSidebar from '@/components/Teacher/Sidebar'
 import TInformation from '@/components/Teacher/Information'
 
 Vue.use(Router)
