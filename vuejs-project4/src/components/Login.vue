@@ -42,6 +42,7 @@ export default {
         });
         if(response.data.flag=='1'){
           localStorage.setItem('token', response.data.user.id);
+          localStorage.setItem('role', response.data.user.role);
           // console.log(response.data.user.role);
           if(response.data.user.role=='admin'){
             this.$router.push('/admin/dashboard');

@@ -54,15 +54,22 @@ export default {
         }
     },
     methods: {
-        handleClick() {
+        logoutClick() {
             localStorage.removeItem('token');
             this.$router.push('/');
         }
     },
     async created() {
         const token = localStorage.getItem('token');
+        const role = localStorage.getItem('role');
         if(!localStorage.getItem('token')){
             this.$router.push('/');
+        }
+        else if(role=='teacher'){
+            this.$router.push('/teacher');
+        }
+        else if(role=='student'){
+            this.$router.push('/student');
         }
         const baseURI = 'http://127.0.0.1:8000/api/get-user/' + token;
         const response = await this.$http.get(baseURI);
