@@ -54,8 +54,9 @@ export default {
         }
     },
     methods: {
-        logoutClick() {
+        handleClick() {
             localStorage.removeItem('token');
+            localStorage.removeItem('role');
             this.$router.push('/');
         }
     },
@@ -65,19 +66,23 @@ export default {
         if(!localStorage.getItem('token')){
             this.$router.push('/');
         }
-         else if(role=='admin'){
-            this.$router.push('/admin');
+        if(role=='admin'){
+            this.$router.push('/admin/dashboard');
         }
         else if(role=='student'){
-            this.$router.push('/student');
+            this.$router.push('/student/dashboard');
         }
-        const baseURI = 'http://127.0.0.1:8000/api/get-user/' + token;
-        const response = await this.$http.get(baseURI);
-        console.log(response.data.user);
+        // const baseURI = 'http://127.0.0.1:8000/api/get-user/' + token;
+        // const response = await this.$http.get(baseURI);
+        // console.log(response.data.user);
     }
 }
 </script>
 <style>
+.wrapper {
+    display: flex;
+    width: 100%;
+}
 .sidebar-logo {
   padding: 10px 15px 10px 30px;
   font-size: 20px;

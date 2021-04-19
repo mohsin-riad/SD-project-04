@@ -66,7 +66,7 @@ export default {
         if(!localStorage.getItem('token')){
             this.$router.push('/');
         }
-         else if(role=='teacher'){
+        if(role=='teacher'){
             this.$router.push('/teacher/dashboard');
         }
         else if(role=='admin'){
