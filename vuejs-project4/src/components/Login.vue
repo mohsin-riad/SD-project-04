@@ -33,6 +33,19 @@ export default {
         password: ''
       }
     },
+    async created() {
+        
+        const role = localStorage.getItem('role');
+        if(localStorage.getItem('token')){
+            const role = localStorage.getItem('role');
+            if(role=='teacher'){
+                this.$router.push('/teacher/dashboard');
+            }
+            else if(role=='admin'){
+                this.$router.push('/admin/dashboard');
+            }
+        }
+    },
     methods: {
       async handle_submit() {
         const baseURI = 'http://127.0.0.1:8000/api/store-login'

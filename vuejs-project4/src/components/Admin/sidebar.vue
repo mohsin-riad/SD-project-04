@@ -17,6 +17,14 @@
                             <i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard
                         </router-link>
                     </li>
+                    <li class="header">Creation</li>
+                    <ul>
+                        <li>
+                            <router-link to="/admin/creation/teacher">
+                                <i class="fa fa-tachometer" aria-hidden="true"></i> Create Teacher
+                            </router-link>
+                        </li>
+                    </ul>
                     <li class="header">Another Menu</li>
                     <li>
                         <router-link to="#">
