@@ -42,8 +42,8 @@ export default {
 }
 
 body {
-  background: #bb771e;
-  background: linear-gradient(to right, #815103, #e7a324);
+  background: #9012e4;
+  background: linear-gradient(to right, #31024d, #9113c3);
 }
 
 .card-signin {
