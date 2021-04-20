@@ -6,6 +6,8 @@ import Login from '@/components/Login'
 import AdminDashboard from '@/components/Admin/Dashboard'
 import AdminSidebar from '@/components/Admin/Sidebar'
 import AInformation from '@/components/Admin/Information'
+import Creation from '@/components/Admin/Creation/Creation'
+import Tcreation from '@/components/Admin/Creation/Teacher-creation'
 
 import StudentDashboard from '@/components/Student/Dashboard'
 import StudentSidebar from '@/components/Student/Sidebar'
@@ -38,6 +40,18 @@ export default new Router({
           path: 'information',
           name: 'Information',
           component: AInformation
+        },
+        {
+          path: 'creation',
+          name: 'Creation',
+          component: Creation,
+          children: [
+            {
+              path: 'teacher',
+              name: 'Tcreation',
+              component : Tcreation
+            }
+          ]
         }
       ]
     },
