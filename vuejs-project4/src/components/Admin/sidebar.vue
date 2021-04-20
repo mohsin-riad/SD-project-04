@@ -9,13 +9,62 @@
                     <li class="header">Navigation</li>
                     <li>
                         <router-link to="/admin/dashboard">
-                            <i class="fa fa-home" aria-hidden="true"></i> Homepage
+                            <i class="fa fa-home" aria-hidden="true"></i> Dashboard
                         </router-link>
                     </li>
                     <li>
-                        <router-link to="/admin/dashboard">
-                            <i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard
-                        </router-link>
+                        <a href="javascript:void(0);" class="" @click="subToggle1">
+                            <i class="fa fa-tachometer" aria-hidden="true"></i> Creation
+                        </a>
+                        <ul class="sidebar-sub-nav" v-bind:style="{display: show1}">
+                            <li>
+                                <router-link to="/admin/">
+                                    <i class="fa fa-home" aria-hidden="true"></i> Course
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link to="/admin/">
+                                    <i class="fa fa-home" aria-hidden="true"></i> Teacher
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link to="/admin/">
+                                    <i class="fa fa-home" aria-hidden="true"></i> Student
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link to="/admin/">
+                                    <i class="fa fa-home" aria-hidden="true"></i> Section
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link to="/admin/">
+                                    <i class="fa fa-home" aria-hidden="true"></i> Session
+                                </router-link>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="" @click="subToggle2">
+                            <i class="fa fa-tachometer" aria-hidden="true"></i> Manage
+                        </a>
+                        <ul class="sidebar-sub-nav" v-bind:style="{display: show2}">
+                            <li>
+                                <router-link to="/admin/">
+                                    <i class="fa fa-home" aria-hidden="true"></i> Session
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link to="/admin/">
+                                    <i class="fa fa-home" aria-hidden="true"></i> Enrollment Status
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link to="/admin/">
+                                    <i class="fa fa-home" aria-hidden="true"></i> Student Enrollment
+                                </router-link>
+                            </li>
+                        </ul>
                     </li>
                     <li class="header">Another Menu</li>
                     <li>
@@ -50,7 +99,10 @@
 export default {
     data() {
         return {
-             user: null
+             user: null,
+             show1: 'none',
+             show2: 'none',
+             fg: true
         }
     },
     methods: {
@@ -58,6 +110,18 @@ export default {
             localStorage.removeItem('token');
             localStorage.removeItem('role');
             this.$router.push('/');
+        },
+        subToggle1() {
+            if(this.fg) this.show1 = 'block';
+            else this.show1 = 'none';
+            this.fg ^= 1;
+            console.log(this.fg);
+        },
+        subToggle2() {
+            if(this.fg) this.show2 = 'block';
+            else this.show2 = 'none';
+            this.fg ^= 1;
+            console.log(this.fg);
         }
     },
     async created() {
@@ -86,14 +150,26 @@ export default {
 .sidebar-logo {
   padding: 10px 15px 10px 30px;
   font-size: 20px;
-  background-color: #ac7500;
+  background-color: #553a00;
 }
 .sidebar-navigation li::before {
-  background-color: #c39642;
+  background-color: #3f2a03;
   position: absolute;
   content: '';
   height: 100%;
   left: 0;
+  top: 0;
+  -webkit-transition: width 0.2s ease-in;
+  transition: width 0.2s ease-in;
+  width: 3px;
+  z-index: -1;
+}
+.sidebar-sub-nav li::before {
+  background-color: #251601;
+  position: absolute;
+  content: '';
+  height: 95%;
+  left: 1%;
   top: 0;
   -webkit-transition: width 0.2s ease-in;
   transition: width 0.2s ease-in;
