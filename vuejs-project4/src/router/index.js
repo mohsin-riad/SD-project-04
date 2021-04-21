@@ -8,6 +8,10 @@ import AdminSidebar from '@/components/Admin/Sidebar'
 import AInformation from '@/components/Admin/Information'
 import Creation from '@/components/Admin/Creation/Creation'
 import Tcreation from '@/components/Admin/Creation/Teacher-creation'
+import Stdcreation from '@/components/Admin/Creation/Student-creation'
+import Sescreation from '@/components/Admin/Creation/Session-creation'
+import Seccreation from '@/components/Admin/Creation/Section-creation'
+import Crscreation from '@/components/Admin/Creation/Course-creation'
 
 import StudentDashboard from '@/components/Student/Dashboard'
 import StudentSidebar from '@/components/Student/Sidebar'
@@ -50,6 +54,26 @@ export default new Router({
               path: 'teacher',
               name: 'Tcreation',
               component : Tcreation
+            },
+            {
+              path: 'student',
+              name: 'Stdcreation',
+              component : Stdcreation
+            },
+            {
+              path: 'session',
+              name: 'Sescreation',
+              component : Sescreation
+            },
+            {
+              path: 'section',
+              name: 'Seccreation',
+              component : Seccreation
+            },
+            {
+              path: 'course',
+              name: 'Crscreation',
+              component : Crscreation
             }
           ]
         }

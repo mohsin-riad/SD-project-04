@@ -18,27 +18,27 @@
                         </a>
                         <ul class="sidebar-sub-nav" v-bind:style="{display: show1}">
                             <li>
-                                <router-link to="/admin/">
+                                <router-link to="/admin/creation/course">
                                     <i class="fa fa-home" aria-hidden="true"></i> Course
                                 </router-link>
                             </li>
                             <li>
-                                <router-link to="/admin/">
+                                <router-link to="/admin/creation/teacher">
                                     <i class="fa fa-home" aria-hidden="true"></i> Teacher
                                 </router-link>
                             </li>
                             <li>
-                                <router-link to="/admin/">
+                                <router-link to="/admin/creation/student">
                                     <i class="fa fa-home" aria-hidden="true"></i> Student
                                 </router-link>
                             </li>
                             <li>
-                                <router-link to="/admin/">
+                                <router-link to="/admin/creation/section">
                                     <i class="fa fa-home" aria-hidden="true"></i> Section
                                 </router-link>
                             </li>
                             <li>
-                                <router-link to="/admin/">
+                                <router-link to="/admin/creation/session">
                                     <i class="fa fa-home" aria-hidden="true"></i> Session
                                 </router-link>
                             </li>
@@ -66,14 +66,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="header">Creation</li>
-                    <ul>
-                        <li>
-                            <router-link to="/admin/creation/teacher">
-                                <i class="fa fa-tachometer" aria-hidden="true"></i> Create Teacher
-                            </router-link>
-                        </li>
-                    </ul>
+                    
                     <li class="header">Another Menu</li>
                     <li>
                         <router-link to="#">
