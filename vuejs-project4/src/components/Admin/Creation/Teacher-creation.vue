@@ -4,10 +4,24 @@
             <div class="col-sm-9 col-md-7 col-lg-6 mx-auto">
                 <div class="card card-signin my-5">
                     <div class="card-body">
-                        <div>
-                            <b-form-input v-model="text" placeholder="Enter your name"></b-form-input>
-                            <div class="mt-2">Value: {{ text }}</div>
-                        </div>
+                        <h5 class="card-title text-center">Create Teacher</h5>
+                        <form @submit.prevent="createTeacher" class="form-signin">
+                            <div class="form-label-group">
+                                <input type="name" id="inputName" v-model="name" class="form-control" placeholder="Full name" required autofocus>
+                                <label for="inputName">Full name</label>
+                            </div>
+                            <div class="form-label-group">
+                                <input type="email" id="inputEmail" v-model="email" class="form-control" placeholder="Email address" required autofocus>
+                                <label for="inputEmail">Email address</label>
+                            </div>
+
+                            <div class="form-label-group">
+                                <input type="password" id="inputPassword" v-model="password" class="form-control" placeholder="Password" required>
+                                <label for="inputPassword">Password</label>
+                            </div>
+
+                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Create</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -19,20 +33,30 @@
 export default {
     data() {
         return {
-             user: null,
-             text: ''
+            name: null,
+            email: null,
+            password: null,
+            role: 'teacher'
         }
     },
-    async created() {
-        const token = localStorage.getItem('token');
-        const baseURI = 'http://127.0.0.1:8000/api/get-user/' + token;
-        const response = await this.$http.get(baseURI, {
-            headers: {
-                Authorization: 'Bearer' + token
-            }
-        });
-        this.user = response.data.user;
-        console.log(response.data.user);
+    methods: {
+      async createTeacher() {
+        // console.log(this.name)
+        // console.log(this.email)
+        // console.log(this.password)
+        // console.log(this.role)
+        
+        const baseURI = 'http://127.0.0.1:8000/api/create-teacher'
+        this.$http.post(baseURI, {
+          name : this.name,
+          email: this.email,
+          password: this.password,
+          role: this.role
+        })
+        .then((res)=>{
+            alert(res.data.msg)
+        })
+      }
     }
 }
 </script>
