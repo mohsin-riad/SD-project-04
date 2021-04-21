@@ -6,17 +6,17 @@
                 <div class="card-body">
                     <h5 class="card-title text-center">Sign In</h5>
                     <form @submit.prevent="handle_submit" class="form-signin">
-                    <div class="form-label-group">
-                        <input type="email" id="inputEmail" v-model="email" class="form-control" placeholder="Email address" required autofocus>
-                        <label for="inputEmail">Email address</label>
-                    </div>
+                      <div class="form-label-group">
+                          <input type="email" id="inputEmail" v-model="email" class="form-control" placeholder="Email address" required autofocus>
+                          <label for="inputEmail">Email address</label>
+                      </div>
 
-                    <div class="form-label-group">
-                        <input type="password" id="inputPassword" v-model="password" class="form-control" placeholder="Password" required>
-                        <label for="inputPassword">Password</label>
-                    </div>
+                      <div class="form-label-group">
+                          <input type="password" id="inputPassword" v-model="password" class="form-control" placeholder="Password" required>
+                          <label for="inputPassword">Password</label>
+                      </div>
 
-                    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+                      <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
                     </form>
                 </div>
                 </div>
