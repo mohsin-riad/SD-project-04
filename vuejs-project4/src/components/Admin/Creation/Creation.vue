@@ -1,4 +1,3 @@
-
 <template>
     <div class="container">
         <div class="row">
@@ -7,15 +6,14 @@
                     <div class="card-body">
                         <div>
                             <h5 class="card-title text-center" >{{ role }} Creation</h5>
+                            <hr>
                         </div>
+                        <router-view></router-view>
                     </div>
                 </div>
             </div>
         </div>
-         <div class="col-10">
-            <router-view></router-view>
-        </div>
-    </div>
+    </div>  
 </template>
 
 <script>
@@ -45,7 +43,7 @@ body {
 .card-signin {
   border: 0;
   border-radius: 1rem;
-  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 2rem 2rem 2rem 0 rgba(0, 0, 0, 0.1);
 }
 
 .card-signin .card-title {
