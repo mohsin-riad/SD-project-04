@@ -1,5 +1,5 @@
 <template>
-    <div class="card-body">
+    <div>
         <h5 class="card-title text-center">Create Teacher</h5>
         <form @submit.prevent="createTeacher" class="form-signin">
             <div class="form-label-group">
