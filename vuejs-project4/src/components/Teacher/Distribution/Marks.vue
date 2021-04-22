@@ -4,9 +4,9 @@
         <form @submit.prevent="createDist">
             <div class="form-group">
                 <label for="">Select Session</label>
-                <select class="form-control"  v-model="session">
+                <select class="form-control" @change="sessionChange" v-model="session">
                   <option disabled value="">Please select one</option>
-                  <option v-for="s in sessions" :key="s.id" :value="s.value">{{s.name}}</option>
+                  <option v-for="s in sessions" :key="s.id" :value="s.id">{{s.name}}</option>
                   
                 </select>
             </div>
@@ -31,6 +31,16 @@ export default {
         console.log(this.sessions);
     },
     methods: {
+        async sessionChange () {
+          const token = localStorage.getItem('token');
+            const baseURI = 'http://127.0.0.1:8000/api/get-assigned-teacher-course/' + token;
+            const response = await this.$http.post(baseURI, {
+              session_id: this.session
+            });
+            console.log(response.data);
+            // this.sessions = response.data.session;
+            // console.log(this.sessions);
+        },
         createDist () {
 
         }
