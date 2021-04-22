@@ -7,7 +7,13 @@
                 <select class="form-control" @change="sessionChange" v-model="session">
                   <option disabled value="">Please select one</option>
                   <option v-for="s in sessions" :key="s.id" :value="s.id">{{s.name}}</option>
-                  
+                </select>
+            </div>
+            <div v-if="courses" class="form-group">
+                <label for="">Select Course</label>
+                <select class="form-control" @change="courseChange" v-model="course">
+                  <option disabled value="">Please select one</option>
+                  <option v-for="c in courses" :key="c.id" :value="c.id">{{c.name}}</option>
                 </select>
             </div>
         </form>
@@ -19,7 +25,9 @@ export default {
     data() {
         return {
           sessions: [],
-          session: null
+          session: null,
+          courses: [],
+          course: null
         }
     },
     async created() {
@@ -37,9 +45,11 @@ export default {
             const response = await this.$http.post(baseURI, {
               session_id: this.session
             });
-            console.log(response.data);
-            // this.sessions = response.data.session;
-            // console.log(this.sessions);
+            // console.log(response.data);
+            this.courses = response.data.course;
+        },
+        courseChange () {
+
         },
         createDist () {
 
