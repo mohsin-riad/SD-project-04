@@ -51,13 +51,14 @@ class TeacherController extends Controller
         // "SELECT * FROM `sessions` WHERE id = $session_id";
         $t_id = $id;
         $c_id = $r->course_id;
+        $s_id = $r->session_id;
         $section = DB::table('teacher_assigns')
                     ->join('sections', 'teacher_assigns.section_id', '=', 'sections.id')
                     ->where('teacher_assigns.teacher_id', '=', $t_id)
                     ->where('teacher_assigns.session_id', '=', $s_id)
                     ->where('teacher_assigns.course_id', '=', $c_id)
                     ->where('teacher_assigns.status', '=', 0)
-                    ->select('courses.id', 'courses.name')
+                    ->select('sections.id', 'sections.name')
                     ->get();
 
         return response()->json([
