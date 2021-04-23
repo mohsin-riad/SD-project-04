@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Teacher_assign;
 use App\Models\Session;
 use App\Models\Course;
+use App\Models\Section;
 use DB;
 
 class TeacherController extends Controller
@@ -42,6 +43,25 @@ class TeacherController extends Controller
 
         return response()->json([
             'course'=> $course,
+            'msg' => 'success'
+        ]);
+    }
+    public function getSection(Request $r, $id){ 
+        // SELECT DISTINCT `session_id` FROM `teacher_assign` WHERE teacher_id = $teacher_id AND `status` = 0";
+        // "SELECT * FROM `sessions` WHERE id = $session_id";
+        $t_id = $id;
+        $c_id = $r->course_id;
+        $section = DB::table('teacher_assigns')
+                    ->join('sections', 'teacher_assigns.section_id', '=', 'sections.id')
+                    ->where('teacher_assigns.teacher_id', '=', $t_id)
+                    ->where('teacher_assigns.session_id', '=', $s_id)
+                    ->where('teacher_assigns.course_id', '=', $c_id)
+                    ->where('teacher_assigns.status', '=', 0)
+                    ->select('courses.id', 'courses.name')
+                    ->get();
+
+        return response()->json([
+            'section'=> $section,
             'msg' => 'success'
         ]);
     }
