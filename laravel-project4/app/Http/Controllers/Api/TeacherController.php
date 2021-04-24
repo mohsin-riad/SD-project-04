@@ -8,11 +8,12 @@ use App\Models\Teacher_assign;
 use App\Models\Session;
 use App\Models\Course;
 use App\Models\Section;
+use App\Models\Num_dist;
 use DB;
 
 class TeacherController extends Controller
 {
-#For Marks Distribution-------------------------------------------------------------
+#<start> For Marks Distribution-------------------------------------------------------------
     public function getSession($id){ 
         // SELECT DISTINCT `session_id` FROM `teacher_assign` WHERE teacher_id = $teacher_id AND `status` = 0";
         // "SELECT * FROM `sessions` WHERE id = $session_id";
@@ -66,4 +67,22 @@ class TeacherController extends Controller
             'msg' => 'success'
         ]);
     }
+    public function createDistribution(Request $r){ 
+        foreach($r->sections_id as $section_id) {
+            foreach($r->categories as $cat) {
+                $obj = new Num_dist();
+                $obj->course_id     = $r->course_id ;
+                $obj->teacher_id    = $r->teacher_id ;
+                $obj->section_id    = $section_id ;
+                $obj->session_id    = $r->session_id ;
+                $obj->catagory_name = $cat['name'] ;
+                $obj->marks         = $cat['value'] ;
+                $obj->save();
+            }
+        }
+        return response()->json([
+            'msg' => 'success'
+        ]);
+    }
+#<end>------------------------------------------------------------------------------------------
 }

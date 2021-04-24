@@ -38,6 +38,7 @@ Route::get('get-user/{id}', [AuthController::class, 'getUserById']);
     Route::get('get-assigned-teacher-session/{id}', [TeacherController::class, 'getSession']);
     Route::post('get-assigned-teacher-course/{id}', [TeacherController::class, 'getCourse']);
     Route::post('get-assigned-teacher-section/{id}', [TeacherController::class, 'getSection']);
+    Route::post('create-distribution', [TeacherController::class, 'createDistribution']);
 
 
 //Student :---------------------------------------------------------------
