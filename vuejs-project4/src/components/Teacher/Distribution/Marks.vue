@@ -1,7 +1,7 @@
 <template>
     <div>
         <h5 class="card-title text-center">Marks Distribution</h5>
-        <form @submit.prevent="createDist">
+        <form @submit.prevent="crerateDistribution">
             
             <div class="form-group">
                 <label for="">Select Session</label>
@@ -29,7 +29,7 @@
             <div v-if="fg3">
                 <div class="row">
                     <div class="col-md-4 portlets">
-                        <button type='button' class="btn btn-info" @click="addNewRow">
+                        <button v-show="total_marks!=100" type='button' class="btn btn-info" @click="addNewRow">
                             <i class="fas fa-plus-circle">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
                                     <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
@@ -38,11 +38,17 @@
                             Add
                         </button>
                     </div>
-                    <div class="col-md-4 portlets">
-                        <label for=""> Total Marks:</label>
+                    <div class="col-md-4 text-right">
+                        Total Marks:
                     </div>
                     <div class="col-md-4">
                         <input readonly class="form-control bg-dark text-white" type="number" v-model="total_marks"/>
+                    </div>
+                </div>
+
+                <div v-show="total_marks>100" class="form-group"><br>
+                    <div class="alert alert-danger" role="alert">
+                        Marks Limit Exceeded <small> <strong> Please Choose Between 0 to 100 </strong> </small>
                     </div>
                 </div>
 
@@ -50,18 +56,18 @@
 
                 <table @change="categoryChange">
                     <tr v-for="(category, k) in categories" :key="k">
-                        <td scope="row" class="btn btn-warning">
+                        <td scope="row" class="btn btn-danger">
                             <i @click="deleteRow(k, category)">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
-                                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                                 </svg>
                             </i>
+                        </td>&emsp;
+                        <td>
+                            <input class="form-control text-center text-white bg-dark" type="text" placeholder="enter catagory"  v-model="category.name" />
                         </td>
                         <td>
-                            <input class="form-control" type="text" v-model="category.name" />
-                        </td>
-                        <td>
-                            <input class="form-control text-right" type="number" min="0" step=".01" v-model="category.value" @change="calculateLineTotal(category)"
+                            <input class="form-control text-center text-white bg-dark" type="number" placeholder="enter number" v-model="category.value" @change="calculateLineTotal(category)"
                             />
                         </td>
                         <td hidden>
@@ -69,6 +75,15 @@
                         </td>
                     </tr>
                 </table>
+            </div>
+
+            <div v-show="total_marks==100" class="form-group"><hr>
+                <button type="submit" class="btn btn-success text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                    </svg>
+                    Save Distribution
+                </button>
             </div>
 
         </form>
@@ -128,10 +143,17 @@ export default {
             this.sections = response.data.section;
             this.fg2 = true;
         },
-        async sectionChange () {
+        sectionChange () {
             console.log(this.section);
-            this.fg3 = true;
+            if(this.section) this.fg3 = true;
+            else this.fg3 = false;
         },
+        categoryChange () {
+            console.log(this.section);
+            if(this.section) this.fg3 = true;
+            else this.fg3 = false;
+        },
+        async crerateDistribution () {},
 
         addNewRow() {
             this.categories.push({
@@ -165,8 +187,7 @@ export default {
                 this.categories.splice(idx, 1);
             }
             this.calculateTotal();
-        },
-        categoryChange () {}
+        }
     }
 }
 </script>
