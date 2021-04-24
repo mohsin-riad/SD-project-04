@@ -1,7 +1,7 @@
 <template>
     <div>
         <h5 class="card-title text-center">Marks Distribution</h5>
-        <form @submit.prevent="crerateDistribution">
+        <form @submit.prevent="createDistribution">
             
             <div class="form-group">
                 <label for="">Select Session</label>
@@ -119,7 +119,7 @@ export default {
         // console.log(response.data);
         this.sessions = response.data.session;
         // console.log(this.sessions);
-        console.log(this.section);
+        // console.log(this.section);
     },
     methods: {
         async sessionChange () {
@@ -139,21 +139,31 @@ export default {
               session_id: this.session,
               course_id: this.course
             });
-            console.log(response.data);
+            // console.log(response.data);
             this.sections = response.data.section;
             this.fg2 = true;
         },
         sectionChange () {
-            console.log(this.section);
-            if(this.section) this.fg3 = true;
-            else this.fg3 = false;
+            // console.log(this.section);
+            this.fg3 = true;
         },
         categoryChange () {
-            console.log(this.section);
-            if(this.section) this.fg3 = true;
-            else this.fg3 = false;
+            // console.log(this.section);
+            this.fg3 = true;
         },
-        async crerateDistribution () {},
+        async createDistribution () {
+            // console.log(this.categories);
+            const baseURI = 'http://127.0.0.1:8000/api/create-distribution';
+            const response = await this.$http.post(baseURI, {
+                teacher_id: localStorage.getItem('token'),
+                session_id: this.session,
+                course_id: this.course,
+                sections_id: this.section,
+                categories: this.categories
+            });
+            console.log(response.data);
+            alert(response.data.msg);
+        },
 
         addNewRow() {
             this.categories.push({
