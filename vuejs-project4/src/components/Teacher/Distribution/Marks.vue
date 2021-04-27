@@ -6,7 +6,7 @@
             <div class="form-group">
                 <label for="">Select Session</label>
                 <select class="form-control text-white bg-dark" :required="true" @change="sessionChange" v-model="session">
-                  <option :selected="true">Please select one</option>
+                  <option :selected="true" :value="0">Please select one</option>
                   <option v-for="s in sessions" :key="s.id" :value="s.id">{{s.name}}</option>
                 </select>
             </div>
@@ -14,7 +14,7 @@
             <div v-show="session" class="form-group">
                 <label for="">Select Course</label>
                 <select class="form-control text-white bg-dark" :required="true" @change="courseChange" v-model="course">
-                  <option :selected="true">Please select one</option>
+                  <option :selected="true" :value="0">Please select one</option>
                   <option v-for="c in courses" :key="c.id" :value="c.id">{{c.name}}</option>
                 </select>
             </div>
