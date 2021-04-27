@@ -3,14 +3,14 @@
         <h5 class="card-title text-center">Manage Session</h5>
         <div class="col-md">
             <h4 class="card-title text-center"><b>Active Session</b></h4>
-            <form @submit.prevent="createSection" class="form-signin">
+            <form @submit.prevent="activeSession" class="form-signin">
 
                 <div class="">
-                    <label for="inputSemester">Choose Session</label>
-                    <select id="inputSemester" v-model="sem" class="form-control" required>
-                        <option v-for="sem in sems" :key="sem.id" :value="sem.id">{{sem.id}}</option>
+                    <label for="inputSession">Choose Session</label>
+                    <select id="inputSession" v-model="session" class="form-control" required>
+                        <option v-for="s in sessions" v-if="!s.status" :key="s.id" :value="s.id" >{{s.name}}</option>
                     </select>
-                    <label for="inputSemester"></label>
+                    <label for=""></label>
                 </div>
 
                 <button class="btn btn-lg btn-success btn-block text-uppercase" type="submit">Active</button>
@@ -27,14 +27,14 @@
         <div class="row"><hr></div>
          <div class="col-md">
              <h4 class="card-title text-center"><b>Deactive Session</b></h4>
-            <form @submit.prevent="createSection" class="form-signin">
+            <form @submit.prevent="deactiveSession" class="form-signin">
 
-                <div class="">
+                 <div class="">
                     <label for="inputSemester">Choose Session</label>
-                    <select id="inputSemester" v-model="sem" class="form-control" required>
-                        <option v-for="sem in sems" :key="sem.id" :value="sem.id">{{sem.id}}</option>
+                    <select id="inputSemester" v-model="session" class="form-control" required>
+                        <option v-for="s in sessions" v-if="s.status" :key="s.id" :value="s.id">{{s.name}}</option>
                     </select>
-                    <label for="inputSemester"></label>
+                    <label for=""></label>
                 </div>
 
                 <button class="btn btn-lg btn-danger btn-block text-uppercase" type="submit">Deactive</button>
@@ -58,28 +58,57 @@
 export default {
     data() {
         return {
-            
-           
+            sessions: [],
+            session: null,
             msg: null
         }
     },
-    methods: {
-      async createSection() {
-        // console.log(this.name)
-        // console.log(this.sem)
+    mounted(){
+        this.getSession();
         
-        const baseURI = 'http://127.0.0.1:8000/api/create-section'
-        this.$http.post(baseURI, {
-          name : this.name,
-          sem: this.sem
-        })
-        .then((res)=>{
-            this.msg = res.data.msg;
-            this.name = null;
-            this.sem = null;
-        })
-      }
-    }
+    },
+    methods: {
+        getSession(){
+            const baseURI = 'http://127.0.0.1:8000/api/get-session'
+            this.$http.get(baseURI)
+            .then((res)=>{
+                this.sessions = res.data.sessions
+                this.msg = res.data.msg
+            })
+            
+            //console.log(this.sessions);
+        },
+        async activeSession() {
+            const baseURI = 'http://127.0.0.1:8000/api/update-session'
+            this.$http.post(baseURI, {
+                id : this.session,
+                status: 0
+            })
+            .then((res)=>{
+                this.msg = res.data.msg;
+                this.session = null;
+                //this.sessions = [];
+                alert(this.msg)
+            })
+            
+            
+         },
+        async deactiveSession() {
+            const baseURI = 'http://127.0.0.1:8000/api/update-session'
+            this.$http.post(baseURI, {
+                id : this.session,
+                status: 1
+            })
+            .then((res)=>{
+                this.msg = res.data.msg;
+                this.session = null;
+                //this.sessions = [];
+                alert(this.msg)
+            })
+            
+         }
+    },
+        
 }
 </script>
 <style scoped>
