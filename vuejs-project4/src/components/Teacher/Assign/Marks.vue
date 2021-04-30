@@ -21,45 +21,48 @@
                                 <div v-show="session" class="form-group">
                                     <label for="">Select Available Course</label>
                                     <select class="form-control text-white bg-dark" :required="true" @change="courseChange" v-model="course">
-                                    <option :selected="true" :value="0">Please select one</option>
-                                    <option v-for="c in courses" :key="c.id" :value="c.id">{{c.name}}</option>
+                                        <option :selected="true" :value="0">Please select one</option>
+                                        <option v-for="c in courses" :key="c.id" :value="c.id">{{c.name}}</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="col-4">
-                                <div v-show="course" class="form-group">
+                                <div v-show="course && session" class="form-group">
                                     <label for="">Select Available Section</label>
                                     <select class="form-control text-white bg-dark" :required="true" @change="sectionChange" v-model="section">
-                                    <option :selected="true" :value="0">Please select one</option>
-                                    <option v-for="s in sections" :key="s.id" :value="s.id">{{s.name}}</option>
+                                        <option :selected="true" :value="0">Please select one</option>
+                                        <option v-for="s in sections" :key="s.id" :value="s.id">{{s.name}}</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <hr>
-                        <h5 class="card-title text-center"> My Marks Distributions </h5>
-                        <table class="table table-hover table-dark">
-                            <thead>
-                                <tr>
-                                <th scope="col">#S/N</th>
-                                <th scope="col">ID</th>
-                                <th scope="col">Name</th>
-                                <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="dist in dist_list"   :key="dist.id">
-                                  <td scope="row" ><strong>{{dist.id}}</strong></td>
-                                  <td>{{ dist.course_name }}</td>
-                                  <td>{{ dist.session_name }}</td>
-                                  <td>{{ dist.section_name }}</td>
-                                  <td>{{ dist.catagory_name }}</td>
-                                  <td>{{ dist.marks }}</td>
-                                </tr>
-                                
-                            </tbody>
-                        </table>
+                        <div v-show="session && course && section">
+                            <h5 class="card-title text-center"> Enrolled Students </h5>
+                            <table class="table table-hover table-dark">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col" v-for="i in data" :key="i.id">{{i.name+'('+i.marks+')'}}</th>
+                                    <th scope="col">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="i in list" :key="i.id">
+                                        <td>{{ i.i }}</td>
+                                        <td>{{ i.id }}</td>
+                                        <td>{{ i.name }}</td>
+                                        <td v-for="j in i.marks" :key="j.id">
+                                            <input class="form-control text-center text-white bg-dark" type="number" :placeholder="j"/>
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -78,13 +81,9 @@ export default {
             sections: [],
             section: null,
             fg: false,
-            fg1: 0,
             total_marks: 0,
-            categories: [{
-                name: '',
-                value: '',
-                line_total: 0
-            }]
+            data: [],
+            list: []
         }
     },
     async created() {
@@ -103,7 +102,7 @@ export default {
             this.courses = response.data.course;
             console.log(this.courses);
         },
-         async courseChange () {
+        async courseChange () {
             const token = localStorage.getItem('token');
             const baseURI = 'http://127.0.0.1:8000/api/get-assigned-dist-teacher-section/' + token;
             const response = await this.$http.post(baseURI, {
@@ -111,6 +110,18 @@ export default {
               course_id: this.course
             });
             this.sections = response.data.section;
+        },
+        async sectionChange () {
+            const token = localStorage.getItem('token');
+            const baseURI = 'http://127.0.0.1:8000/api/get-assigned-dist-teacher/' + token;
+            const response = await this.$http.post(baseURI, {
+              session_id: this.session,
+              course_id: this.course,
+              section_id: this.section
+            });
+            this.data = response.data.obj;
+            this.list = response.data.list;
+            console.log(response.data);
         }
     }
 }
