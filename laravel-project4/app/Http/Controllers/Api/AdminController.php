@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Course;
 use App\Models\Section;
 use App\Models\Session;
+use App\Models\Type;
 use DB;
 
 class AdminController extends Controller
@@ -102,6 +103,38 @@ class AdminController extends Controller
                 return response() -> json([
                     'data' => $obj,
                     'msg' => 'Session deactivated'
+                ]);
+            }
+        }
+    }
+
+    public function getType(){
+        $types = Type::get();
+        return response() -> json([
+            'types' => $types,
+            'msg' => 'types Successfully retrived'
+        ]);
+    }
+
+    public function updateType(Request $request){
+        $id = $request->id;
+        $status = $request->status;
+        $obj = Type::find($id);
+        if($status==0){
+            $obj->status=1;
+            if($obj->save()){
+                return response() -> json([
+                    'data' => $obj,
+                    'msg' => 'Type Activated'
+                ]);
+            }
+        }
+        else if($status==1){
+            $obj->status=0;
+            if($obj->save()){
+                return response() -> json([
+                    'data' => $obj,
+                    'msg' => 'Type deactivated'
                 ]);
             }
         }

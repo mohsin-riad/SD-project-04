@@ -78,7 +78,7 @@ export default {
             
             //console.log(this.sessions);
         },
-        async activeSession() {
+        async activeType() {
             const baseURI = 'http://127.0.0.1:8000/api/update-type'
             this.$http.post(baseURI, {
                 id : this.type,
@@ -92,21 +92,21 @@ export default {
             })
             
             
-         },
-        async deactiveSession() {
-            const baseURI = 'http://127.0.0.1:8000/api/update-session'
+        },
+        async deactiveType() {
+            const baseURI = 'http://127.0.0.1:8000/api/update-type'
             this.$http.post(baseURI, {
-                id : this.session,
+                id : this.type,
                 status: 1
             })
             .then((res)=>{
                 this.msg = res.data.msg;
-                this.session = null;
+                this.type = null;
                 //this.sessions = [];
                 alert(this.msg)
             })
             
-         }
+        }
     },
         
 }
