@@ -186,36 +186,7 @@ class TeacherController extends Controller
                  ->where('num_dists.section_id', '=', $sec_id)
                  ->select('num_dists.id as id', 'num_dists.catagory_name as name', 'num_dists.marks')
                  ->get();
-        
-        // $teacher_id = $_SESSION['id'];
-        // $course_id = $_REQUEST['course_id'];
-        // $section_id = $_REQUEST['section_id'];
-        // $session_id = $_REQUEST['session_id'];
-        // $query = "SELECT users.name, student_id FROM enrollment, users WHERE course_id=$course_id AND section_id=$section_id AND teacher_id=$teacher_id AND session_id=$session_id AND status=1 AND users.id = enrollment.student_id";
-        // // echo $query;
-        // $sql = mysqli_query($conn, $query);
-        // $data = [];
-        // $i = 0;
-        // while($row = mysqli_fetch_array($sql))
-        // {
-        //     $student_id = $row['student_id'];
-        //     $data[$i]['name'] = $row['name'];
-        //     $data[$i]['student_id'] = $student_id;
     
-        //     $query1 = "SELECT dist_id, marks FROM marks_assign WHERE marks_assign.student_id = $student_id AND marks_assign.teacher_id = $teacher_id AND marks_assign.course_id = $course_id AND marks_assign.section_id = $section_id AND marks_assign.session_id = $session_id";
-        //     $sql1 = mysqli_query($conn, $query1);
-        //     $flag = true;
-        //     $j = 0;
-        //     while($row1 = mysqli_fetch_array($sql1)){
-        //         $dist_id = $row1['dist_id'];
-        //         if($flag) { $data[$i]['begin'] = $dist_id; $flag = false; }
-        //         else { $data[$i]['end'] = $dist_id; }
-        //         $marks = $row1['marks'];
-        //         $data[$i][$j] = $marks; 
-        //         $j++;
-        //     }   
-        //     $i++;
-        // }
         $obj1 = DB::table('enrollments')
                  ->join('users', 'users.id', 'enrollments.student_id')
                  ->join('marks_assigns', 'users.id', 'marks_assigns.student_id')
@@ -242,24 +213,27 @@ class TeacherController extends Controller
         $data = [];
         $i = 0;
         foreach($obj2 as $j) {
-            $fg=1;
+            $total=0;
+            // $fg=1;
             $cnt=0;
             foreach($obj1 as $k) {
                 if($j->student_id == $k->student_id) {
-                    if($fg) {
-                        $data[$i]['id_begin'] = $k->id;
-                        $fg^=1;
-                    }
-                    else { $data[$i]['id_end'] = $k->id; }
+                    // if($fg) {
+                    //     $data[$i]['id_begin'] = $k->id;
+                    //     $fg^=1;
+                    // }
+                    // else { $data[$i]['id_end'] = $k->id; }
 
                     $data[$i]['i'] = $i;
                     $data[$i]['id'] = $j->student_id;
                     $data[$i]['name'] = $k->name;
-                    $data[$i]['marks'][$cnt++] = (string)$k->marks;
-
+                    $data[$i]['marks'][$cnt]['id'] = $k->id;
+                    $data[$i]['marks'][$cnt]['numbers'] = $k->marks;
+                    $total += $k->marks;
+                    $cnt++;
                 }
-                // else break;
             }
+            $data[$i]['line_total'] = $total;
             $i++;
         } 
         
