@@ -29,11 +29,19 @@ import Marks from '@/components/Teacher/Distribution/Marks'
 import Show from '@/components/Teacher/Distribution/Show'
 import AssignMarks from '@/components/Teacher/Assign/Marks'
 
+import Datatable from '@/components/Datatable'
+
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/datatable',
+      name: 'Datatable',
+      component: Datatable
+
+    },
     {
       path: '/',
       name: 'Login',

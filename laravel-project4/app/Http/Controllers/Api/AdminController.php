@@ -139,4 +139,19 @@ class AdminController extends Controller
             }
         }
     }
+    public function getEnrollment(){
+        $enrolls = DB::table('enrollments as e')
+                ->where('e.status', '=', 0)
+                ->join('users as s','e.student_id','s.id')
+                ->join('courses as c','e.course_id','c.id')
+                ->join('types as t','e.type_id','t.id')
+                ->join('sections as sec','e.section_id','sec.id')
+                ->join('sessions as ses','e.session_id','ses.id')
+                ->select('e.id as id','s.id as student','c.name as course','t.name as type','sec.name as section','ses.name as session')
+                ->get();
+        return response() -> json([
+            'enrolls' => $enrolls,
+            'msg' => 'enrollments retrived'
+        ]);
+    }
 }
