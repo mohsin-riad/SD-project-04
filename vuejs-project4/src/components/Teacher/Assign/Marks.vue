@@ -40,28 +40,32 @@
                         <hr>
                         <div v-show="session && course && section">
                             <h5 class="card-title text-center"> Enrolled Students </h5>
-                            <table class="table table-hover table-dark">
-                                <thead>
-                                    <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col" v-for="i in data" :key="i.id">{{i.name+'('+i.marks+')'}}</th>
-                                    <th scope="col">Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="i in list" :key="i.id">
-                                        <td>{{ i.i }}</td>
-                                        <td>{{ i.id }}</td>
-                                        <td>{{ i.name }}</td>
-                                        <td v-for="j in i.marks" :key="j.id">
-                                            <input class="form-control text-center text-white bg-dark" type="number" :placeholder="j"/>
-                                        </td>
-                                    </tr>
-                                    
-                                </tbody>
-                            </table>
+                            <form @submit.prevent="updateStdMarks">
+                                <table class="table table-hover table-dark">
+                                    <thead>
+                                        <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col" v-for="i in data" :key="i.id">{{i.name+'('+i.marks+')'}}</th>
+                                        <th scope="col">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="i in list" :key="i.id">
+                                            <td>{{ i.i }}</td>
+                                            <td>{{ i.id }}</td>
+                                            <td>{{ i.name }}</td>
+                                            <td v-for="mark in i.marks" :key="mark.id">
+                                                <input class="form-control text-center text-white bg-dark" type="number" v-model="mark.numbers" @change="calculateLineTotal(mark,i)"/>
+                                            </td>
+                                            <td>
+                                                <input readonly disabled class="form-control text-center  input-box" type="number" min="0"  v-model="i.line_total" />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -83,7 +87,16 @@ export default {
             fg: false,
             total_marks: 0,
             data: [],
-            list: []
+            list: [{
+                i: null,
+                id: null,
+                marks: [{
+                    id: null,
+                    numbers: null
+                }],
+                name: '',
+                line_total: 0
+            }]
         }
     },
     async created() {
@@ -121,7 +134,24 @@ export default {
             });
             this.data = response.data.obj;
             this.list = response.data.list;
-            console.log(response.data);
+            console.log(this.list);
+            console.log(this.list.marks);
+        },
+        async calculateLineTotal(mark,list) {
+            var total = parseFloat(mark.numbers);
+            if (!isNaN(total)) {
+                list.line_total = total;
+            }
+            var subtotal = this.list.reduce(function (sum, list) {
+                var lineTotal = parseFloat(list.line_total);
+                if (!isNaN(lineTotal)) {
+                    return sum + lineTotal;
+                }
+            }, 0);
+            this.list.line_total = subtotal;
+        },
+        async updateStdMarks() {
+
         }
     }
 }
