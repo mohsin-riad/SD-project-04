@@ -9,6 +9,7 @@ use App\Models\Course;
 use App\Models\Section;
 use App\Models\Session;
 use App\Models\Type;
+use App\Models\Enrollment;
 use DB;
 
 class AdminController extends Controller
@@ -153,5 +154,16 @@ class AdminController extends Controller
             'enrolls' => $enrolls,
             'msg' => 'enrollments retrived'
         ]);
+    }
+    public function updateEnrollment(Request $request){
+        $id = $request->id;
+        $obj = Enrollment::find($id);
+        $obj->status=1;
+        if($obj->save()){
+            return response() -> json([
+                'data' => $obj,
+                'msg' => 'Enrollemnt Approved'
+            ]);
+        }
     }
 }

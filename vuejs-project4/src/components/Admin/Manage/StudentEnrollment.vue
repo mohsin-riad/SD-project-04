@@ -10,7 +10,7 @@
             <b-col >
                  <b-table striped hover :items="enrolls" :filter="filter" :per-page="perPage" :current-page="curPage" :fields="fields">
                      <template v-slot:cell(Action)="data">
-                         <b-button variant="success" @click="updateEnrollment(data.item.id)">Approve</b-button>
+                         <b-button variant="success" @click.prevent="updateEnrollment(data.item.id)">Approve</b-button>
                      </template>
                      
                 </b-table> 
