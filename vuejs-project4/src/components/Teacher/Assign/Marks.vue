@@ -10,7 +10,7 @@
         <hr>
         <div class="row">
             <div class="col-sm-11 col-md-11 col-lg-11 mx-auto">
-                <div class="card text-white bg-dark">
+                <div class="card dark text-white bg-dark">
                     <div class="card-header">Marks assignation</div>
                     <div class="card-body">
                         <div class="row">
@@ -203,9 +203,26 @@ body {
   background: #525252;
   background: linear-gradient(to right, #414141ee, #1d1d1d);
 }
+
 .breadcrumb {
     margin-bottom: 0;
     background-color:  #00000036;
     font-weight: bold;
+}
+
+.dark {
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+
+.dark .card-title {
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+.dark .card-body {
+  padding: 2rem;
 }
 </style>
