@@ -218,12 +218,6 @@ class TeacherController extends Controller
             $cnt=0;
             foreach($obj1 as $k) {
                 if($j->student_id == $k->student_id) {
-                    // if($fg) {
-                    //     $data[$i]['id_begin'] = $k->id;
-                    //     $fg^=1;
-                    // }
-                    // else { $data[$i]['id_end'] = $k->id; }
-
                     $data[$i]['i'] = $i;
                     $data[$i]['id'] = $j->student_id;
                     $data[$i]['name'] = $k->name;
@@ -233,13 +227,23 @@ class TeacherController extends Controller
                     $cnt++;
                 }
             }
-            $data[$i]['line_total'] = $total;
+            $data[$i]['total'] = $total;
             $i++;
         } 
         
         return response()->json([
             'obj'=> $obj,
             'list'=> $data,
+            'msg' => 'success'
+        ]);
+    }
+    public function updateStdMarks(Request $r){
+        for($i=0; $i <count($r->ids) ;$i++) {
+            $obj = DB::table('marks_assigns')
+                    ->where('marks_assigns.id', '=', $r->ids[$i])
+                    ->update(['marks' => $r->marks[$i]]);
+        }
+        return response()->json([
             'msg' => 'success'
         ]);
     }
