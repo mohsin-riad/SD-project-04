@@ -1,5 +1,13 @@
 <template>
     <div class="container">
+        <br>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Assign Marks</li>
+            </ol>
+        </nav>
+        <hr>
         <div class="row">
             <div class="col-sm-11 col-md-11 col-lg-11 mx-auto">
                 <div class="card text-white bg-dark">
@@ -52,19 +60,35 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="i in list" :key="i.id">
-                                            <td>{{ i.i }}</td>
-                                            <td>{{ i.id }}</td>
-                                            <td>{{ i.name }}</td>
-                                            <td v-for="mark in i.marks" :key="mark.id">
-                                                <input class="form-control text-center text-white bg-dark" type="number" v-model="mark.numbers" @change="calculateLineTotal(mark,i)"/>
+                                        <tr v-for="(li,i) in list" :key="i">
+                                            <td>{{ li.i }}</td>
+                                            <td>{{ li.id }}</td>
+                                            <td>{{ li.name }}</td>
+                                            <td v-for="(mark, j) in li.marks" :key="j">
+                                                <input class="form-control text-center text-white bg-dark" type="number" v-model="mark.numbers" @change="calculateLineTotal(i)"/>
                                             </td>
-                                            <td>
-                                                <input readonly disabled class="form-control text-center  input-box" type="number" min="0"  v-model="i.line_total" />
+                                            <td> 
+                                                <div class="form-group has-warning has-feedback">
+                                                    <input readonly disabled class="form-control text-center text-white bg-dark" type="number" v-model="li.total"/>
+                                                    <div v-show="li.total>100"> <span class="badge badge-danger">Limit Exceeded</span> </div>
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
+                                <div v-if="fg" class="form-group"><hr>
+                                    <div class="form-group alert alert-success alert-dismissible fade show">
+                                        <strong>Changes Saved!</strong>
+                                    </div>
+                                </div>
+                                <div class="form-group"><hr>
+                                    <button type="submit" class="btn btn-success text-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                        </svg>
+                                        Save Changes
+                                    </button>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -78,6 +102,7 @@
 export default {
      data() {
         return {
+            fg :0,
             sessions: [],
             session: null,
             courses: [],
@@ -92,10 +117,10 @@ export default {
                 id: null,
                 marks: [{
                     id: null,
-                    numbers: null
+                    numbers: null,
+                    line_total: 0
                 }],
-                name: '',
-                line_total: 0
+                name: ''
             }]
         }
     },
@@ -137,21 +162,32 @@ export default {
             console.log(this.list);
             console.log(this.list.marks);
         },
-        async calculateLineTotal(mark,list) {
-            var total = parseFloat(mark.numbers);
-            if (!isNaN(total)) {
-                list.line_total = total;
+        calculateLineTotal(i) {
+            var subTotal = parseInt(0);
+            for(var j=0; j < this.list[i].marks.length ;j++){
+                subTotal += parseInt(this.list[i].marks[j].numbers);
             }
-            var subtotal = this.list.reduce(function (sum, list) {
-                var lineTotal = parseFloat(list.line_total);
-                if (!isNaN(lineTotal)) {
-                    return sum + lineTotal;
-                }
-            }, 0);
-            this.list.line_total = subtotal;
+            this.list[i].total = parseInt(subTotal); 
+            console.log(parseInt(subTotal));
         },
         async updateStdMarks() {
+            let ids = [];
+            let marks = [];
+            var k = parseInt(0);
+            for (var i=0; i<this.list.length ;i++) {
+                for (var j=0; j<this.list[i].marks.length ;j++) {
+                    ids[k] = this.list[i].marks[j].id;
+                    marks[k++] = this.list[i].marks[j].numbers;
+                }
+            }
 
+            const baseURI = 'http://127.0.0.1:8000/api/update-student-marks';
+            const response = await this.$http.post(baseURI, {
+                ids: ids,
+                marks: marks
+            });
+            this.fg = 1;
+            // console.log(response.data);
         }
     }
 }
@@ -165,7 +201,11 @@ export default {
 
 body {
   background: #525252;
-  background: linear-gradient(to right, #e2e2e2ee, #1d1d1d);
+  background: linear-gradient(to right, #414141ee, #1d1d1d);
 }
-
+.breadcrumb {
+    margin-bottom: 0;
+    background-color:  #00000036;
+    font-weight: bold;
+}
 </style>
