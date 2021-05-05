@@ -15,7 +15,24 @@
                     <div class="card-header">Distribution</div>
                     <div class="card-body">
                         <h5 class="card-title text-center"> My Marks Distributions </h5>
-                        <table class="table table-hover table-dark">
+                        <b-row>
+                            <b-col>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <b-form-input v-model="filter" class="text-white bg-dark" align="left" type="search" placeholder="Search"></b-form-input><br>
+                                    </div>
+                                    <div class="col-9">
+                                        <b-pagination class="customPagination" align="right" v-model="curPage"  :total-rows="rows" :per-page="perPage"></b-pagination>
+                                    </div>
+                                </div>
+                            </b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col >
+                                <b-table class="text-white bg-dark" striped hover :items="dist_list" :filter="filter" :per-page="perPage" :current-page="curPage" :fields="fields"> </b-table> 
+                            </b-col>
+                        </b-row>
+                        <!-- <table class="table table-hover table-dark">
                             <thead>
                                 <tr>
                                 <th scope="col">#</th>
@@ -37,7 +54,7 @@
                                 </tr>
                                 
                             </tbody>
-                        </table>
+                        </table> -->
                     </div>
                 </div>
             </div>
@@ -49,8 +66,16 @@
 export default {
     data() {
         return {
-            i: 1,
-            dist_list: []
+            dist_list: [],
+            filter: "",
+            perPage: 5,
+            curPage: 1,
+            fields:["SN", "Course Title", "Session", "Section","Category Name","Marks"],
+        }
+    },
+    computed:{
+        rows(){
+            return this.dist_list.length;
         }
     },
     async created() {
@@ -98,6 +123,13 @@ export default {
   font-weight: 300;
   font-size: 1.5rem;
 }
-
+.page-item.active .page-link {  
+    background-color: rgb(42, 41, 41) !important;  
+    border-color: rgb(44, 161, 230) !important;  
+}
+.page-item .page-link {  
+    background-color: rgb(42, 41, 41) !important;  
+    border-color: rgb(44, 161, 230) !important;  
+}
 
 </style>

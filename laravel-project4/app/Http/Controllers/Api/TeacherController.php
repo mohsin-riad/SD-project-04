@@ -105,11 +105,11 @@ class TeacherController extends Controller
                     ->join('sections', 'num_dists.section_id', '=', 'sections.id')
                     ->join('courses', 'num_dists.course_id', '=', 'courses.id')
                     ->where('num_dists.teacher_id', '=', $id)
-                    ->select('num_dists.id as id', 'sessions.name as session_name', 'sections.name as section_name', 'courses.name as course_name', 'num_dists.catagory_name', 'num_dists.marks')
+                    ->select('sessions.name as Session', 'sections.name as Section', 'courses.name as Course Title', 'num_dists.catagory_name as Category Name', 'num_dists.marks as Marks')
                     ->get();
 
         for ($i=1; $i<=count($distList);$i++) {
-            $distList[$i-1]->id = $i; 
+            $distList[$i-1]->SN = $i; 
         }
         
         return response()->json([
