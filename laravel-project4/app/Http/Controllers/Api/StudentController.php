@@ -84,7 +84,7 @@ class StudentController extends Controller
             $enroll->session_id    = $r->session_id ;
             $enroll->status = 0 ;
             
-            // if($enroll->save()) {
+            if($enroll->save()) {
                 $distribution = DB::table('num_dists')
                                 ->where('num_dists.section_id', '=', $r->section_id[$i])
                                 ->where('num_dists.course_id', '=', $r->course_id[$i])
@@ -102,10 +102,10 @@ class StudentController extends Controller
                     $assign->session_id    = $r->session_id ;
                     $assign->dist_id    = $j->dist_id;
                     $assign->marks    = 0;
-                    // $assign->save();
+                    $assign->save();
                     // $data[$i]['assign'][$k++] = $assign;
                 }
-            // }
+            }
             // $data[$i]['enroll'] = $enroll;
         }
         return response()->json([
