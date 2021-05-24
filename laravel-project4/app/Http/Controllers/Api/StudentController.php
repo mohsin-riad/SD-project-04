@@ -127,7 +127,7 @@ class StudentController extends Controller
             $i->SN = $k++;
             if($i->st == 0) { $i->Status = "Pending"; }
             else if($i->st == 1) { $i->Status = "Approved"; }
-            else { $i->Status = "Rejected"; }
+            else if($i->st == 2) { $i->Status = "Rejected"; }
         }
         return response()->json([
             'list'=> $list,
