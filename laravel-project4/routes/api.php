@@ -67,3 +67,4 @@ Route::get('get-open-sessions', [StudentController::class, 'getSession']);
 Route::get('get-course-list', [StudentController::class, 'getCourseList']);
 Route::post('assign-enroll', [StudentController::class, 'assignEnroll']);
 Route::post('get-pending-list/{id}', [StudentController::class, 'getPendingList']);
+Route::post('get-result/{id}', [StudentController::class, 'getResult']);
