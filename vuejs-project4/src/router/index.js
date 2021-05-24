@@ -23,6 +23,7 @@ import SInformation from '@/components/Student/Information'
 import Enrollment from '@/components/Student/Enrollment/Enrollment'
 import Enroll from '@/components/Student/Enrollment/Enroll'
 import Pending from '@/components/Student/Enrollment/PendingEnrollment'
+import Results from '@/components/Student/Results'
 
 import TeacherDashboard from '@/components/Teacher/Dashboard'
 import TeacherSidebar from '@/components/Teacher/Sidebar'
@@ -133,6 +134,11 @@ export default new Router({
           path: 'information',
           name: 'Information',
           component: SInformation
+        },
+        {
+          path: 'results',
+          name: 'Results',
+          component: Results
         },
         {
           path: 'enrollment',
