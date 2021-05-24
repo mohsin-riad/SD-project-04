@@ -89,11 +89,11 @@ export default {
                 this.courses = res.data.course
                 this.sections = res.data.section
                 this.sessions = res.data.session
-                this.msgs = res.data.msg
+                this.msg = res.data.msg
             })
             
         },
-        async activeType() {
+        async teacherAssign() {
             const baseURI = 'http://127.0.0.1:8000/api/teacher-assign'
             this.$http.post(baseURI, {
                 teacher : this.teacher,
@@ -107,9 +107,9 @@ export default {
                 this.course= null;
                 this.section= null;
                 this.session= null;
-                this.msg= msg;
                 //this.sessions = [];
                 alert(this.msg)
+                
             })
             
         }
