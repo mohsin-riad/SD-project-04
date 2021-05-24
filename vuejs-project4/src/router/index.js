@@ -16,6 +16,7 @@ import Manage from '@/components/Admin/Manage/Manage'
 import Session from '@/components/Admin/Manage/Session'
 import StudentEnrollment from '@/components/Admin/Manage/StudentEnrollment'
 import EnrollmentStatus from '@/components/Admin/Manage/EnrollmentStatus'
+import TeacherAssign from '@/components/Admin/Manage/TeacherAssign'
 
 import StudentDashboard from '@/components/Student/Dashboard'
 import StudentSidebar from '@/components/Student/Sidebar'
@@ -116,6 +117,11 @@ export default new Router({
               path: 'enrollment-status',
               name: 'EnrollmentStatus',
               component : EnrollmentStatus
+            },
+            {
+              path: 'teacher-assign',
+              name: 'TeacherAssign',
+              component : TeacherAssign
             }
           ]
         }

@@ -42,6 +42,8 @@ Route::get('get-user/{id}', [AuthController::class, 'getUserById']);
     Route::post('update-type', [AdminController::class, 'updateType']);
     Route::get('get-enrollment', [AdminController::class, 'getEnrollment']);
     Route::post('update-enrollment', [AdminController::class, 'updateEnrollment']);
+    Route::get('get-all-for-teacher-assign', [AdminController::class, 'getAll']);
+    Route::post('teacher-assign', [AdminController::class, 'teacherAssign']);
 
 
 //Teacher :---------------------------------------------------------------
