@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-sm-11 col-md-11 col-lg-11 mx-auto">
                     <div class="card text-white bg-dark">
-                        <div class="card-header">Pending List</div>
+                        <div class="card-header">Result</div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-4"></div>
@@ -28,7 +28,7 @@
                                 <div class="col-4"></div>
                             </div>
                             <div v-show="session">
-                                <h5 class="card-title text-center"> My Running Courses </h5>
+                                <h5 class="card-title text-center"> My result </h5>
                                 <b-row>
                                     <b-col>
                                         <div class="row">
@@ -65,7 +65,7 @@ export default {
             filter: "",
             perPage: 5,
             curPage: 1,
-            fields:["SN", "Course Title", "Credit", "Section","Type", "Status"],
+            fields:["SN", "Course Title", "Course Code", "Total", "Grade", "CGPA"],
         }
     },
     computed:{
@@ -76,7 +76,7 @@ export default {
     methods: {
         async sessionChange() {
             const token = localStorage.getItem('token');
-            const baseURI = 'http://127.0.0.1:8000/api/get-pending-list/' + token;
+            const baseURI = 'http://127.0.0.1:8000/api/get-result/' + token;
             const response = await this.$http.post(baseURI, {
                 session_id: this.session
             });
