@@ -157,12 +157,15 @@ class AdminController extends Controller
     }
     public function updateEnrollment(Request $request){
         $id = $request->id;
+        $status = $request->status;
         $obj = Enrollment::find($id);
-        $obj->status=1;
+        $obj->status=$status;
+        if($status==1) $msg = 'Enrollemnt Approved';
+        else if($status==2) $msg = 'Enrollemnt Rejected';
         if($obj->save()){
             return response() -> json([
                 'data' => $obj,
-                'msg' => 'Enrollemnt Approved'
+                'msg' => $msg
             ]);
         }
     }
