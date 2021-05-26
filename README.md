@@ -1,5 +1,36 @@
 # Laravel-VueJS-project-04
 
+## Installation
+
+```bash
+# clone the project
+git clone https://github.com/mohsin-riad/SD-project-04.git
+ 
+# enter the project directory
+cd vuejs-project4
+
+# install dependency
+npm install
+
+# develop
+npm run dev
+
+# enter the project directory
+cd laravel-project4
+
+# install dependency
+composer install
+
+# develop
+php artisan serve
+
+```
+> Export updated database ```project_04``` to Localhost Server
+> open http://localhost:8080
+
+---
+
+
 ## Backend [Laravel]
 ### Laravel is a MVC(Model View Controller) framework
 
@@ -48,21 +79,6 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 ```
 
-### Api Package configuration [Axios]
-``` bash
-# individual project integration
-npm i axios --save
-```
-> Add to:  ``` src/main.js ```
-``` bash
-import axios from 'axios'
-Vue.prototype.$http = axios
-```
-> used to sent POST and GET request to the server
-
-### Database
-Export updated database ```project_04``` to Localhost Server
-
 ### Bootstrap vue Integration
 ``` bash
 # individual project integration
@@ -76,4 +92,19 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
+``` 
+
+### Api Package configuration [Axios]
+``` bash
+# individual project integration
+npm i axios --save
 ```
+> Add to:  ``` src/main.js ```
+``` bash
+import axios from 'axios'
+Vue.prototype.$http = axios
+```
+> used to sent POST and GET request to the server
+ 
+### Database
+Export updated database ```project_04``` to Localhost Server
