@@ -25,7 +25,7 @@ composer install
 php artisan serve
 
 ```
-> Export updated database ```project_04``` to Localhost Server
+> Export updated database ```sd_project_04``` to Localhost Server
 * open http://localhost:8080
 
 ---
