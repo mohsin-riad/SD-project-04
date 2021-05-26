@@ -190,7 +190,7 @@ class AdminController extends Controller
         $obj->section_id = $request->section;
         $obj->course_id = $request->course;
         $obj->session_id = $request->session;
-        $obj->status = 1;
+        $obj->status = 0;
         if($obj->save()){
             return response() -> json([
                 'data' => $obj,

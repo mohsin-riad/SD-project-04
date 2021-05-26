@@ -35,12 +35,21 @@
                         <ul class="sidebar-sub-nav" v-bind:style="{display: show1}">
                             <li>
                                 <router-link to="/teacher/distribution/marks">
-                                    <i class="fa fa-home" aria-hidden="true"></i> Marks
+                                    <i class="fa fa-home" aria-hidden="true"></i> 
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-distribute-vertical" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M1 1.5a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 0-1h-13a.5.5 0 0 0-.5.5zm0 13a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 0-1h-13a.5.5 0 0 0-.5.5z"/>
+                                        <path d="M2 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7z"/>
+                                    </svg>&emsp;
+                                    Marks
                                 </router-link>
                             </li>
                             <li>
                                 <router-link to="/teacher/distribution/show">
-                                    <i class="fa fa-home" aria-hidden="true"></i> List
+                                    <i class="fa fa-home" aria-hidden="true"></i> 
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                    </svg>&emsp;
+                                    List
                                 </router-link>
                             </li>
                         </ul>
