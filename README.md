@@ -16,7 +16,7 @@ npm install
 npm run dev
 
 # enter the project directory
-cd laravel-project4
+cd ../laravel-project4
 
 # install dependency
 composer install
