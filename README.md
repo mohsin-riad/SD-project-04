@@ -26,7 +26,7 @@ php artisan serve
 
 ```
 > Export updated database ```project_04``` to Localhost Server
-> open http://localhost:8080
+* open http://localhost:8080
 
 ---
 
